@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://mmtvuxt3bs2p"]
+[gd_scene load_steps=6 format=3 uid="uid://mmtvuxt3bs2p"]
 
 [ext_resource type="Script" path="res://scripts/player/base_player.gd" id="1_1yq76"]
+[ext_resource type="Resource" uid="uid://cttolhdmdjxxk" path="res://scenes/inv/player_inventory.tres" id="2_q1ccn"]
+[ext_resource type="PackedScene" uid="uid://bg1u8jw2d2cg5" path="res://scenes/inv/inv_ui.tscn" id="3_sewbq"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7rbnf"]
 
@@ -9,6 +11,20 @@ points = PackedVector3Array(-0.125207, -0.532801, -0.480507, 0.0227831, 0.47607,
 
 [node name="base_player" type="CharacterBody3D"]
 script = ExtResource("1_1yq76")
+inv = ExtResource("2_q1ccn")
+
+[node name="Inv_UI" parent="." instance=ExtResource("3_sewbq")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -206.0
+offset_top = -238.0
+offset_right = -206.0
+offset_bottom = -238.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_7rbnf")
@@ -23,14 +39,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.697349, 0)
 current = true
 fov = 78.885
 
-[node name="ItemList" type="ItemList" parent="."]
-offset_right = 343.0
-offset_bottom = 67.0
-item_count = 6
-max_columns = 6
-item_0/text = ""
-item_1/text = ""
-item_2/text = ""
-item_3/text = ""
-item_4/text = ""
-item_5/text = ""
+[editable path="Inv_UI"]

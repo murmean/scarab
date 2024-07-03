@@ -1,0 +1,36 @@
+[gd_scene load_steps=11 format=3 uid="uid://m6fnaewbu51"]
+
+[ext_resource type="Script" path="res://scripts/managers/music_manager.gd" id="1_a7lct"]
+[ext_resource type="Script" path="res://scripts/resources/audio_stream_layer.gd" id="2_otu38"]
+[ext_resource type="AudioStream" uid="uid://42lyh436q3l3" path="res://assets/audio/music/sound (1).ogg" id="3_gin2w"]
+[ext_resource type="AudioStream" uid="uid://7hwnljiwbxls" path="res://assets/audio/music/sound (2).ogg" id="4_b158i"]
+[ext_resource type="AudioStream" uid="uid://c636183h2tcba" path="res://assets/audio/music/sound (3).ogg" id="5_ndk4q"]
+[ext_resource type="AudioStream" uid="uid://cnc1ol78jtmr2" path="res://assets/audio/music/sound (4).ogg" id="6_4ws6x"]
+
+[sub_resource type="Resource" id="Resource_hewag"]
+script = ExtResource("2_otu38")
+stream = ExtResource("3_gin2w")
+name = "1"
+b_autoplay = true
+
+[sub_resource type="Resource" id="Resource_fyslc"]
+script = ExtResource("2_otu38")
+stream = ExtResource("4_b158i")
+name = "2"
+b_autoplay = true
+
+[sub_resource type="Resource" id="Resource_k612y"]
+script = ExtResource("2_otu38")
+stream = ExtResource("5_ndk4q")
+name = "3"
+b_autoplay = true
+
+[sub_resource type="Resource" id="Resource_0glbg"]
+script = ExtResource("2_otu38")
+stream = ExtResource("6_4ws6x")
+name = "4"
+b_autoplay = true
+
+[node name="MusicManager" type="Node"]
+script = ExtResource("1_a7lct")
+audio_stream_layers = Array[ExtResource("2_otu38")]([SubResource("Resource_hewag"), SubResource("Resource_fyslc"), SubResource("Resource_k612y"), SubResource("Resource_0glbg")])

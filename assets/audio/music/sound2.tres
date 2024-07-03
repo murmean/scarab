@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AudioStreamLayer" load_steps=3 format=3 uid="uid://dq1tnwqtaj507"]
+
+[ext_resource type="Script" path="res://scripts/resources/audio_stream_layer.gd" id="1_gil3y"]
+[ext_resource type="AudioStream" uid="uid://42lyh436q3l3" path="res://assets/audio/music/sound (1).ogg" id="2_3rr1h"]
+
+[resource]
+script = ExtResource("1_gil3y")
+stream = ExtResource("2_3rr1h")
+name = "1"
+b_autoplay = true

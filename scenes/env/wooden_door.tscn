@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cg2jcrsr8dxdr"]
+
+[ext_resource type="Script" path="res://scripts/env/door.gd" id="1_be7s7"]
+[ext_resource type="ArrayMesh" uid="uid://b8dw7n4g6yucu" path="res://assets/env/wooden_door/10057_wooden_door_v3_iterations-2.obj" id="1_nkhh8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_66gxo"]
+size = Vector3(0.922791, 0.901428, 0.0925293)
+
+[node name="RigidBody3D" type="RigidBody3D"]
+script = ExtResource("1_be7s7")
+
+[node name="10057WoodenDoorV3Iterations-2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.01, 0, 0, 0, -4.37114e-10, 0.01, 0, -0.01, -4.37114e-10, 0, 0, 0)
+mesh = ExtResource("1_nkhh8")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 2.315, 0, 0, 0, 1, -0.0015564, 1.04166, -0.00012207)
+shape = SubResource("BoxShape3D_66gxo")
+
+[connection signal="interacted" from="." to="." method="_on_interacted"]

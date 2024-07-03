@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0it3wowkn447"]
+
+[ext_resource type="Script" path="res://scripts/player/interaction_ray_cast.gd" id="1_ll55t"]
+[ext_resource type="Texture2D" uid="uid://mmhefesptl0f" path="res://icon.svg" id="2_g30xf"]
+
+[node name="InteractionRayCast" type="RayCast3D"]
+target_position = Vector3(0, 0, -4)
+script = ExtResource("1_ll55t")
+
+[node name="Prompt" type="Label" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -224.0
+offset_bottom = -201.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_g30xf")
+expand_mode = 2

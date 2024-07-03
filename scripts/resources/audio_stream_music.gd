@@ -1,4 +1,4 @@
-class_name AudioStreamMusic
+class_name AudioStreamSong
 extends Resource
 
 @export var layers: Array[AudioStreamLayer]

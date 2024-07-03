@@ -18,8 +18,8 @@ signal mute_music
 signal unmute_music
 
 
-@export var audio_stream_musics: Array[AudioStreamMusic]
-var tracks: Dictionary
+@export var audio_stream_songs: Array[AudioStreamSong]
+var songs: Dictionary
 
 func _ready() -> void:
 	play_layer.connect(_play_layer)
@@ -28,22 +28,33 @@ func _ready() -> void:
 	mute_layer.connect(_mute_layer)
 	unmute_layer.connect(_unmute_layer)
 	
-	for music in audio_stream_musics:
-		for layer in music.layers:
-			var audio_stream_player = AudioStreamPlayer.new()
-			var stream = layer.stream
-			
-			stream.loop = true
-			audio_stream_player.stream = stream
-			audio_stream_player.volume_db = VOLUME_DB_SILENCE
-			
-			add_child(audio_stream_player)
-			#audio_stream_players[layer.name] = audio_stream_player
-			
-			if layer.b_autoplay:
-				_play_layer(layer.name, 0, true)
+	songs = _generate_music_players(audio_stream_songs)
+	print(songs)
 	
 	_test()
+
+func _generate_music_players(audio_stream_songs: Array[AudioStreamSong]) -> Dictionary:
+	var dict: Dictionary
+	for song in audio_stream_songs:
+		dict[song.name] = _generate_layer_players(song)
+	return dict
+
+func _generate_layer_players(song: AudioStreamSong) -> Dictionary:
+	var dict: Dictionary
+	for layer in song.layers:
+		var audio_stream_player = AudioStreamPlayer.new()
+		var stream = layer.stream
+		
+		stream.loop = true
+		audio_stream_player.stream = stream
+		audio_stream_player.volume_db = VOLUME_DB_SILENCE
+		
+		add_child(audio_stream_player)
+		dict[layer.name] = audio_stream_player
+		
+		if layer.b_autoplay:
+			_play_layer(layer.name, 0, true)
+	return dict
 
 func _play_layer(layer_name: String, fade_time: float = 1.0, b_is_muted: bool = false) -> void:
 	var tween = _get_tween()
@@ -93,7 +104,8 @@ func _get_tween() -> Tween:
 	return tween
 
 func _get_player(layer_name: String) -> AudioStreamPlayer:
-	return audio_stream_players[layer_name]
+	return null
+	#return audio_stream_players[layer_name]
 
 func _get_volume_db(b_is_muted: bool) -> float:
 	if b_is_muted:

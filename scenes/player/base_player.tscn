@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://mmtvuxt3bs2p"]
+[gd_scene load_steps=5 format=3 uid="uid://mmtvuxt3bs2p"]
 
 [ext_resource type="Script" path="res://scripts/player/base_player.gd" id="1_1yq76"]
+[ext_resource type="PackedScene" uid="uid://d0it3wowkn447" path="res://scenes/player/interaction_ray_cast.tscn" id="2_oew6l"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7rbnf"]
 
@@ -22,6 +23,8 @@ shape = SubResource("ConvexPolygonShape3D_lugij")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.697349, 0)
 current = true
 fov = 78.885
+
+[node name="InteractionRayCast" parent="Head/Camera3D" instance=ExtResource("2_oew6l")]
 
 [node name="ItemList" type="ItemList" parent="."]
 offset_right = 343.0

@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1vjawf4c187b"]
+
+[ext_resource type="Script" path="res://scripts/env/moving_object.gd" id="1_cpicr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e45k1"]
+size = Vector3(2.5, 4, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ag8q"]
+albedo_color = Color(1, 0.384314, 0.341176, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4hrqm"]
+material = SubResource("StandardMaterial3D_1ag8q")
+size = Vector3(2.5, 4, 0.2)
+
+[sub_resource type="Curve3D" id="Curve3D_7s0jh"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[node name="door" type="Node3D"]
+script = ExtResource("1_cpicr")
+move_time = 4.0
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_e45k1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnimatableBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("BoxMesh_4hrqm")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_7s0jh")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+rotation_mode = 0
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D/PathFollow3D"]
+remote_path = NodePath("../../../AnimatableBody3D")

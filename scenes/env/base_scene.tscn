@@ -1,6 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://ci6l328bf4kg6"]
+[gd_scene load_steps=10 format=3 uid="uid://ci6l328bf4kg6"]
 
 [ext_resource type="PackedScene" uid="uid://mmtvuxt3bs2p" path="res://scenes/player/base_player.tscn" id="1_hqb6v"]
+[ext_resource type="PackedScene" uid="uid://dgmtu05kur5ov" path="res://scenes/env/button.tscn" id="2_j47n0"]
+[ext_resource type="PackedScene" uid="uid://daktd8wnbdosj" path="res://scenes/env/moving_platform.tscn" id="2_kcioi"]
+[ext_resource type="PackedScene" uid="uid://d1vjawf4c187b" path="res://scenes/env/door.tscn" id="4_q08pp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rlg2s"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -67,3 +70,19 @@ transform = Transform3D(-0.00443181, 0, -18.0588, 0, 1.00194, 0, 13.3664, 0, -0.
 material_override = SubResource("StandardMaterial3D_1cjgk")
 use_collision = true
 size = Vector3(0.152237, 2.521, 3.27954)
+
+[node name="MovingPlatform" parent="." instance=ExtResource("2_kcioi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.879, 0.149692, 6.32925)
+
+[node name="Button" parent="." instance=ExtResource("2_j47n0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0862, 0.149691, 5.84519)
+
+[node name="door" parent="." instance=ExtResource("4_q08pp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.53042, 0.149692, 6.57687)
+move_time = 2.0
+
+[node name="Button2" parent="." instance=ExtResource("2_j47n0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3949, 0.149692, 6.24159)
+
+[connection signal="interacted" from="Button" to="MovingPlatform" method="toggle"]
+[connection signal="interacted" from="Button2" to="door" method="toggle"]

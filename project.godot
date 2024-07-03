@@ -29,6 +29,10 @@ glossary/default_case_sensitive=true
 
 enabled=PackedStringArray("res://addons/dialogic/plugin.cfg", "res://addons/qodot/plugin.cfg")
 
+[filesystem]
+
+import/fbx/enabled=false
+
 [input]
 
 dialogic_default_action={

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgmtu05kur5ov"]
+
+[ext_resource type="Script" path="res://scripts/env/interactable.gd" id="1_lwrg1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5ahvf"]
+size = Vector3(0.2, 0.4, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ju215"]
+albedo_color = Color(0.411765, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_clhww"]
+material = SubResource("StandardMaterial3D_ju215")
+size = Vector3(0.2, 0.4, 0.2)
+
+[node name="Button" type="AnimatableBody3D"]
+script = ExtResource("1_lwrg1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_5ahvf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_clhww")
+skeleton = NodePath("")

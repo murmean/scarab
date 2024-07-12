@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://ci6l328bf4kg6"]
+[gd_scene load_steps=11 format=3 uid="uid://ci6l328bf4kg6"]
 
 [ext_resource type="PackedScene" uid="uid://mmtvuxt3bs2p" path="res://scenes/player/base_player.tscn" id="1_hqb6v"]
 [ext_resource type="PackedScene" uid="uid://dgmtu05kur5ov" path="res://scenes/env/button.tscn" id="2_j47n0"]
 [ext_resource type="PackedScene" uid="uid://daktd8wnbdosj" path="res://scenes/env/moving_platform.tscn" id="2_kcioi"]
 [ext_resource type="PackedScene" uid="uid://d1vjawf4c187b" path="res://scenes/env/door.tscn" id="4_q08pp"]
+[ext_resource type="PackedScene" uid="uid://daga6bki1mrn7" path="res://scenes/env/physics_object.tscn" id="5_m6p4w"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rlg2s"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -83,6 +84,10 @@ move_time = 2.0
 
 [node name="Button2" parent="." instance=ExtResource("2_j47n0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3949, 0.149692, 6.24159)
+
+[node name="RigidBody3D" parent="." instance=ExtResource("5_m6p4w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.9434, 2.82153, 0.440372)
+pull_power = 4.0
 
 [connection signal="interacted" from="Button" to="MovingPlatform" method="toggle"]
 [connection signal="interacted" from="Button2" to="door" method="toggle"]

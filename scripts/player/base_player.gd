@@ -1,8 +1,9 @@
+class_name BasePlayer
 extends CharacterBody3D
 
 var speed 
-const WALK_SPEED = 5.0
-const SPRINT_SPEED = 8.0
+const WALK_SPEED = 3.0
+const SPRINT_SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const SENSITIVITY = 0.015
 # Get the gravity from the project settings to be synced with RigidBody nodes.

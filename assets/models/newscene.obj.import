@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dxrvq2yin50x5"
+path="res://.godot/imported/newscene.obj-e6b34f49f0278901d9e65eb2dccd7e63.mesh"
+
+[deps]
+
+files=["res://.godot/imported/newscene.obj-e6b34f49f0278901d9e65eb2dccd7e63.mesh"]
+
+source_file="res://assets/models/newscene.obj"
+dest_files=["res://.godot/imported/newscene.obj-e6b34f49f0278901d9e65eb2dccd7e63.mesh", "res://.godot/imported/newscene.obj-e6b34f49f0278901d9e65eb2dccd7e63.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

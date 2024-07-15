@@ -1,9 +1,10 @@
 [gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://dnxpe7iwmlla1"]
 
 [ext_resource type="Script" path="res://scripts/inv/inventory_item.gd" id="1_mqpsx"]
-[ext_resource type="Texture2D" uid="uid://mmhefesptl0f" path="res://icon.svg" id="2_vhalk"]
+[ext_resource type="Texture2D" uid="uid://7o0n3f7h4p5g" path="res://tile2.png" id="2_86mxs"]
 
 [resource]
 script = ExtResource("1_mqpsx")
 name = "try2"
-texture = ExtResource("2_vhalk")
+texture = ExtResource("2_86mxs")
+max_amount_per_stack = 5

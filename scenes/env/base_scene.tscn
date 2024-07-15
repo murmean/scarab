@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ci6l328bf4kg6"]
+[gd_scene load_steps=9 format=3 uid="uid://ci6l328bf4kg6"]
 
 [ext_resource type="PackedScene" uid="uid://mmtvuxt3bs2p" path="res://scenes/player/base_player.tscn" id="1_hqb6v"]
+[ext_resource type="PackedScene" uid="uid://diofsp4sv0qx6" path="res://scenes/inv/collectable.tscn" id="2_28pr8"]
+[ext_resource type="PackedScene" uid="uid://c7n08ql85l704" path="res://scenes/inv/collectable2.tscn" id="3_wwk2k"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rlg2s"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -22,6 +24,18 @@ albedo_color = Color(0.631144, 0.000224289, 0.608896, 1)
 albedo_color = Color(0.2, 1, 0.152941, 1)
 
 [node name="base_scene" type="Node3D"]
+
+[node name="collectable4" parent="." instance=ExtResource("2_28pr8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.32832, 1.17283, 0.39276)
+
+[node name="collectable3" parent="." instance=ExtResource("2_28pr8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.99624, 1.40166, 1.79106)
+
+[node name="collectable2" parent="." instance=ExtResource("2_28pr8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.66416, 1.21038, -1.15053)
+
+[node name="collectable" parent="." instance=ExtResource("2_28pr8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33208, 1.15938, 2.22797)
 
 [node name="base_player" parent="." instance=ExtResource("1_hqb6v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14059, 0)
@@ -67,3 +81,6 @@ transform = Transform3D(-0.00443181, 0, -18.0588, 0, 1.00194, 0, 13.3664, 0, -0.
 material_override = SubResource("StandardMaterial3D_1cjgk")
 use_collision = true
 size = Vector3(0.152237, 2.521, 3.27954)
+
+[node name="collectable5" parent="." instance=ExtResource("3_wwk2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.46857, 6.31361)

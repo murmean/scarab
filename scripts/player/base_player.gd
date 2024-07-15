@@ -11,6 +11,7 @@ var gravity = 9.8
 
 #inventory
 @export var inv:Inventory
+@onready var inv_ui = $Inv_UI
 
 
 #camera-bob variables
@@ -21,8 +22,6 @@ var t_bob = 0.0
 #fov variables
 const BASE_FOV = 75.0
 const FOV_CHANGE = 1.5
-	
-
 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
@@ -35,7 +34,7 @@ func _ready():
 
 
 func _unhandled_input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and inv_ui.visible == false:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x,deg_to_rad(-70),deg_to_rad(60))
@@ -89,3 +88,6 @@ func _headbob(time) -> Vector3:
 	pos.y = sin(time * BOB_FREQ)* BOB_AMP
 	pos.x = cos(time * BOB_FREQ/2) * BOB_AMP
 	return pos
+
+func collect(item):
+	inv.insert(item)

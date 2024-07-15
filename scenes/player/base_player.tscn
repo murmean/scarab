@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://d0it3wowkn447" path="res://scenes/player/interaction_ray_cast.tscn" id="2_oew6l"]
 [ext_resource type="Script" path="res://scripts/player/object_position.gd" id="3_c5ky7"]
 [ext_resource type="Resource" uid="uid://cttolhdmdjxxk" path="res://scenes/inv/player_inventory.tres" id="2_q1ccn"]
-[ext_resource type="PackedScene" uid="uid://bg1u8jw2d2cg5" path="res://scenes/inv/inv_ui.tscn" id="3_sewbq"]
+[ext_resource type="PackedScene" uid="uid://bg1u8jw2d2cg5" path="res://scripts/inv/inv_ui.tscn" id="3_sewbq"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7rbnf"]
 
@@ -20,7 +20,7 @@ dof_blur_far_enabled = true
 dof_blur_far_transition = 60.0
 dof_blur_amount = 0.2
 
-[node name="base_player" type="CharacterBody3D"]
+[node name="base_player" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_1yq76")
 inv = ExtResource("2_q1ccn")
 

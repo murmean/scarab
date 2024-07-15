@@ -7,3 +7,4 @@
 script = ExtResource("1_hserc")
 name = "try1"
 texture = ExtResource("2_2e4c2")
+max_amount_per_stack = 4

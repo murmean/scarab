@@ -1,13 +1,17 @@
 [gd_scene load_steps=2 format=3 uid="uid://c0h6ubbaadcdk"]
 
-[ext_resource type="Script" path="res://scripts/inv/slot.gd" id="1_dmtt5"]
+[ext_resource type="Script" path="res://scripts/inv/slot_ui.gd" id="1_vv2d4"]
 
-[node name="inv_slot" type="Panel"]
+[node name="inv_slot" type="Button"]
 custom_minimum_size = Vector2(64, 64)
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = -1
+anchor_right = 0.022
+anchor_bottom = 0.04
+offset_right = 14.656
+offset_bottom = 14.08
 scale = Vector2(0.402134, 0.402134)
-script = ExtResource("1_dmtt5")
+focus_mode = 0
+script = ExtResource("1_vv2d4")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 custom_minimum_size = Vector2(40, 40)
@@ -16,21 +20,5 @@ offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(1.62637, 1.62637)
 
-[node name="Panel" type="Panel" parent="CenterContainer"]
-layout_mode = 2
-
-[node name="item_display" type="Sprite2D" parent="CenterContainer/Panel"]
-
-[node name="Label" type="Label" parent="."]
-custom_minimum_size = Vector2(10, 23)
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -10.0
-offset_top = -23.0
-grow_horizontal = 0
-grow_vertical = 0
-horizontal_alignment = 2
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

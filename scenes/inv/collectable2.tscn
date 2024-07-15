@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7n08ql85l704"]
+
+[ext_resource type="Script" path="res://scripts/inv/collectable.gd" id="1_tcy3t"]
+[ext_resource type="Resource" uid="uid://dnxpe7iwmlla1" path="res://scenes/inv/try2.tres" id="2_efirb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3tckk"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_avgyf"]
+size = Vector3(1.28064, 1, 1.13013)
+
+[node name="collectable" type="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.000915527, 0.0305176)
+use_collision = true
+size = Vector3(1, 0.998169, 0.938965)
+material = SubResource("StandardMaterial3D_3tckk")
+script = ExtResource("1_tcy3t")
+item = ExtResource("2_efirb")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1.10732, 0, 0, 0, 1.16062, 0, 0, 0, 0.993295, 0.0324101, 0, 0.053833)
+shape = SubResource("BoxShape3D_avgyf")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

@@ -9,6 +9,10 @@ const SENSITIVITY = 0.015
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 9.8
 
+#inventory
+@export var inv:Inventory
+
+
 #camera-bob variables
 const BOB_FREQ = 2.0
 const BOB_AMP = 0.08
@@ -17,9 +21,12 @@ var t_bob = 0.0
 #fov variables
 const BASE_FOV = 75.0
 const FOV_CHANGE = 1.5
+	
+
 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
+
 
 
 
@@ -31,7 +38,7 @@ func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
-		camera.rotation.x = clamp(camera.rotation.x,deg_to_rad(-40),deg_to_rad(60))
+		camera.rotation.x = clamp(camera.rotation.x,deg_to_rad(-70),deg_to_rad(60))
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -54,6 +61,7 @@ func _physics_process(delta):
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("left", "right", "frwd", "backwrd")
 	var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	#decceleration
 	if is_on_floor():
 		if direction:
 			velocity.x = direction.x * speed

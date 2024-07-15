@@ -1,8 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://mmtvuxt3bs2p"]
-
 [ext_resource type="Script" path="res://scripts/player/base_player.gd" id="1_1yq76"]
 [ext_resource type="PackedScene" uid="uid://d0it3wowkn447" path="res://scenes/player/interaction_ray_cast.tscn" id="2_oew6l"]
 [ext_resource type="Script" path="res://scripts/player/object_position.gd" id="3_c5ky7"]
+[ext_resource type="Resource" uid="uid://cttolhdmdjxxk" path="res://scenes/inv/player_inventory.tres" id="2_q1ccn"]
+[ext_resource type="PackedScene" uid="uid://bg1u8jw2d2cg5" path="res://scenes/inv/inv_ui.tscn" id="3_sewbq"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7rbnf"]
 
@@ -21,6 +22,20 @@ dof_blur_amount = 0.2
 
 [node name="base_player" type="CharacterBody3D"]
 script = ExtResource("1_1yq76")
+inv = ExtResource("2_q1ccn")
+
+[node name="Inv_UI" parent="." instance=ExtResource("3_sewbq")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -206.0
+offset_top = -238.0
+offset_right = -206.0
+offset_bottom = -238.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
@@ -85,3 +100,5 @@ shadow_enabled = true
 omni_range = 2.0
 
 [connection signal="timeout" from="Head/Camera3D/ObjectPosition/Timer" to="Head/Camera3D/ObjectPosition" method="_on_timer_timeout"]
+[editable path="Inv_UI"]
+

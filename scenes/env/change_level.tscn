@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpvcpx075bw64"]
+
+[ext_resource type="Script" path="res://scripts/env/change_level.gd" id="1_qncix"]
+
+[node name="level_changer" type="Node3D"]
+script = ExtResource("1_qncix")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b32fe6ds70tcy"]
+[gd_scene load_steps=22 format=3 uid="uid://b32fe6ds70tcy"]
 
 [ext_resource type="PackedScene" uid="uid://mmtvuxt3bs2p" path="res://scenes/player/base_player.tscn" id="1_7q08g"]
 [ext_resource type="Material" uid="uid://c12oo043hb3xe" path="res://assets/textures/TCom_Scifi_Panel.tres" id="1_e5jbr"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://e70ottf7k7pl" path="res://assets/poster/poster_1.jpg" id="6_6lwsa"]
 [ext_resource type="PackedScene" uid="uid://d2c076a68wfrn" path="res://scenes/env/beer_bottle.tscn" id="8_1eia5"]
 [ext_resource type="Script" path="res://scenes/env/levels/out_of_bounds.gd" id="9_1rl6t"]
+[ext_resource type="PackedScene" uid="uid://diofsp4sv0qx6" path="res://scenes/inv/collectable.tscn" id="10_e0trb"]
+[ext_resource type="PackedScene" uid="uid://c7n08ql85l704" path="res://scenes/inv/collectable2.tscn" id="11_rrxi4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_eua57"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -250,6 +252,7 @@ omni_range = 8.0
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="Node3D2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5491, 5.00085, 6.24274)
+visible = false
 light_color = Color(1, 0.615686, 0, 1)
 light_energy = 0.5
 shadow_enabled = true
@@ -257,6 +260,7 @@ omni_range = 8.0
 
 [node name="OmniLight3D5" type="OmniLight3D" parent="Node3D2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5491, 5.00085, 11.9351)
+visible = false
 light_color = Color(1, 0.615686, 0, 1)
 light_energy = 0.5
 shadow_enabled = true
@@ -334,6 +338,12 @@ shape = SubResource("BoxShape3D_nce7s")
 
 [node name="Marker3D" type="Marker3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.3195, 0)
+
+[node name="collectable" parent="Area3D/Marker3D" instance=ExtResource("10_e0trb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01342, -0.000915527, 2.58107)
+
+[node name="collectable" parent="Area3D/Marker3D/collectable" instance=ExtResource("11_rrxi4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.000915527, -1.83156)
 
 [node name="Button2" parent="." instance=ExtResource("4_atu6g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.3, 2.11291, -9.25539)

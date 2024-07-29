@@ -31,9 +31,10 @@ func _process(delta):
 
 func _on_area_3d_body_entered(body):
 	if obj_health <= 0:
-		obj_position.drop()
+		if obj_position:
+			obj_position.drop()
 		$MeshInstance3D.visible = false
-		$CollisionShape3D.disabled = true
+		$CollisionShape3D.call_deferred("set_disabled",true)
 		$GPUParticles3D.emitting = true
 		await get_tree().create_timer($GPUParticles3D.lifetime).timeout
 		queue_free()

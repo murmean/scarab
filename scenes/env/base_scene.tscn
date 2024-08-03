@@ -1,6 +1,4 @@
-
 [gd_scene load_steps=16 format=3 uid="uid://ci6l328bf4kg6"]
-
 
 [ext_resource type="PackedScene" uid="uid://mmtvuxt3bs2p" path="res://scenes/player/base_player.tscn" id="1_hqb6v"]
 [ext_resource type="PackedScene" uid="uid://88ws8i6svlgs" path="res://scenes/enemies/base_enemy.tscn" id="1_nffn0"]
@@ -38,17 +36,15 @@ polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Arr
 
 [node name="base_scene" type="Node3D"]
 
-
 [node name="base_enemy" parent="." instance=ExtResource("1_nffn0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.33774, 13.0125)
 player_path = NodePath("../base_player")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="."]
-transform = Transform3D(178.664, 0, 0, 0, 1.00391, 0, 0, 0, 326.12, -7.81829, 3.55008, -1.14243)
+transform = Transform3D(178.664, 0, 0, 0, 1.00391, 0, 0, 0, 326.12, -7.81829, 3.29462, -1.14243)
 material_override = SubResource("StandardMaterial3D_0gpdp")
 use_collision = true
 size = Vector3(0.132355, 2.85943, 0.0166016)
-
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="."]
 transform = Transform3D(13.3664, 0, 0, 0, 1.00194, 0, 0, 0, 18.0588, 11.37, 2.86608, -0.892414)
@@ -80,7 +76,6 @@ material_override = SubResource("StandardMaterial3D_1cjgk")
 use_collision = true
 size = Vector3(0.152237, 2.521, 3.27954)
 
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
@@ -88,7 +83,6 @@ shadow_opacity = 0.55
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xduq2")
-
 
 [node name="MovingPlatform" parent="." instance=ExtResource("2_kcioi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.879, 0.149692, 6.32925)
@@ -114,7 +108,7 @@ file = ExtResource("8_yyh1s")
 player = NodePath("../base_player")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.75825, -0.499007, -0.642999)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.92573, -0.657586, -0.101029)
 navigation_mesh = SubResource("NavigationMesh_bjgne")
 
 [node name="ground" type="CSGBox3D" parent="NavigationRegion3D"]
@@ -133,4 +127,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.38379, 1.08777, 9.17594)
 [connection signal="interacted" from="Button" to="MovingPlatform" method="toggle"]
 [connection signal="interacted" from="Button2" to="NavigationRegion3D/door" method="toggle"]
 [connection signal="interacted" from="Button3" to="change_level" method="change_scene"]
-

@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://biuvf0j2nagln"]
+
+[node name="options_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabBar" type="TabBar" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+tab_count = 4
+tab_alignment = 1
+tab_0/title = "Sound"
+tab_1/title = "Video"
+tab_2/title = ""
+tab_3/title = ""
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.494444
+anchor_right = 0.1
+anchor_bottom = 0.494444
+offset_left = 140.0
+offset_top = -10.0
+offset_right = 247.0
+offset_bottom = 13.0
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Master sound"
+horizontal_alignment = 2
+vertical_alignment = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.603125
+anchor_top = 0.5
+anchor_right = 0.603125
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -8.0
+offset_right = 50.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 8

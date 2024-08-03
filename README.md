@@ -7,6 +7,9 @@ To get it to work:
   2. Attach to it the state_machine.gd
   3. To this main node add as many new nodes as you need which will hold the scripts for the other states (when creating these scripts they need to extend State)
   4. Connect and use them VIA the new calls, you can find them in the state.gd script.
+  5. To actually change the state you need to call transitioned(self,"name_of_the_node") (it's important to have properly named the nodes that will be children of the state machine
+                                                                                            as their names will be used to change the state, by changing the name_of_the_node variable with
+                                                                                               name of your nodes)
 
 New calls are used to interact with the state machine and new states. They are as follows:
   1. state_enter() equivalent to _enter(), it's called whenever the character enters a new state

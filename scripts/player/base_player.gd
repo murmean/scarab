@@ -2,11 +2,15 @@ class_name BasePlayer
 extends CharacterBody3D
 
 var speed 
-const CROUCH_SPEED = 2.0	
+const CROUCH_SPEED: float  = 1.5 
 const WALK_SPEED = 3.0
 const SPRINT_SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const SENSITIVITY = 0.015
+
+
+
+
 # Get the gravity from the pro
 
 #Hand control
@@ -19,12 +23,14 @@ var gravity = 9.8
 @onready var inv_ui = $Inv_UI
 
 #under objects detection
-@onready var crouch_detection = $crouch_detection
+@export_range(5, 10, 0.1) var CROUCH_ANIMATION_SPEED: float = 7.0
+@onready var under_object_cast = $Head/ShapeCast3D
 var is_crouching = false
 
 #changing level logic
 @onready var fade_rect = $fade
 @onready var animation_player = $AnimationPlayer
+
 
 
 
@@ -45,6 +51,8 @@ const FOV_CHANGE = 1.5
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	under_object_cast.add_exception($".")
+
 
 
 
@@ -62,18 +70,21 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor() and !crouch_detection.is_colliding():
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor() and !under_object_cast.is_colliding() and is_crouching == false:
 		velocity.y = JUMP_VELOCITY
 		
-	# Handle speed.
-	if Input.is_action_pressed("crouch") or  crouch_detection.is_colliding(): 
-		crouch()
-	elif Input.is_action_pressed("sprint") and is_on_floor() and is_crouching == false:
+	# Handle speed.  
+
+			
+	if Input.is_action_just_pressed("crouch") and is_on_floor():
+		toggle_crouching()
+		
+	if Input.is_action_pressed("sprint") and is_on_floor() and is_crouching == false:
 		speed = SPRINT_SPEED
+	elif is_crouching == true:
+		speed = CROUCH_SPEED
 	else:
 		speed= WALK_SPEED
-		scale.y =1 
-		is_crouching = false
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -111,17 +122,22 @@ func _headbob(time) -> Vector3:
 func collect(item):
 	inv.insert(item)
 	
-func crouch():
-	if !is_on_floor():
-		return
-	# FIXME FIX RESIZING WHEN CROUCHING
-	scale.y = 0.6
-	position.y -= 0.45
-	speed = CROUCH_SPEED
-	is_crouching = true
-			
+	
+#TODO TEST NEW CROUCHING SYSTEM
+func toggle_crouching():
+	if is_crouching == true and under_object_cast.is_colliding() == false:
+		print("UNCROUCHING")
+		animation_player.play("crouch", -1, -CROUCH_ANIMATION_SPEED, true)
+	elif is_crouching == false:
+		print("CROUCHING")
+		animation_player.play("crouch", -1, CROUCH_ANIMATION_SPEED)
+
 # fade when changing level
 func fade():
 	fade_rect.visible = true
 	animation_player.play("fade_in")
 	
+
+func _on_animation_player_animation_started(anim_name):
+	if anim_name == "crouch":
+		is_crouching = !is_crouching

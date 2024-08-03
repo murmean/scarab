@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://4s2og303mc58"]
+
+[ext_resource type="Script" path="res://scripts/UI/start_screen.gd" id="1_o6upi"]
+
+[sub_resource type="Theme" id="Theme_maqnf"]
+
+[node name="StartScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o6upi")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.266667, 0.266667, 0.266667, 0.764706)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 285.0
+offset_top = 112.0
+offset_right = 355.0
+offset_bottom = 248.0
+theme = SubResource("Theme_maqnf")
+
+[node name="play_btn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Play"
+
+[node name="options_btn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="about_btn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "About"
+
+[node name="exit btn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="VBoxContainer/play_btn" to="." method="_on_play_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/options_btn" to="." method="_on_options_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/about_btn" to="." method="_on_about_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/exit btn" to="." method="_on_exit_btn_pressed"]

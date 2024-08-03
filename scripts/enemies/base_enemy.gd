@@ -19,7 +19,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _ready():
 	player = get_node(player_path)
 
-func _process(delta):
+func _physics_process(delta):
 	
 	
 	#Navigation
@@ -31,3 +31,9 @@ func _process(delta):
 	look_at(Vector3(player.global_position.x, global_position.y,player.global_position.z),Vector3.UP)
 	
 	move_and_slide()
+
+
+
+
+
+

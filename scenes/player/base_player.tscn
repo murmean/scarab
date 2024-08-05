@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://mmtvuxt3bs2p"]
+[gd_scene load_steps=17 format=3 uid="uid://mmtvuxt3bs2p"]
 
 [ext_resource type="Script" path="res://scripts/player/base_player.gd" id="1_1yq76"]
 [ext_resource type="PackedScene" uid="uid://d0it3wowkn447" path="res://scenes/player/interaction_ray_cast.tscn" id="2_oew6l"]
 [ext_resource type="Resource" uid="uid://cttolhdmdjxxk" path="res://scenes/inv/player_inventory.tres" id="2_q1ccn"]
+[ext_resource type="Shader" path="res://scripts/screenshader.gdshader" id="3_0raiu"]
 [ext_resource type="Script" path="res://scripts/player/object_position.gd" id="3_c5ky7"]
 [ext_resource type="PackedScene" uid="uid://bg1u8jw2d2cg5" path="res://scripts/inv/inv_ui.tscn" id="3_sewbq"]
 
@@ -20,6 +21,32 @@ volumetric_fog_albedo = Color(0.0901961, 0.0901961, 0.0901961, 1)
 dof_blur_far_enabled = true
 dof_blur_far_transition = 60.0
 dof_blur_amount = 0.2
+
+[sub_resource type="Gradient" id="Gradient_qg33y"]
+colors = PackedColorArray(0.593978, 0.0835024, 0, 1, 0.364706, 0.392157, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_imqng"]
+gradient = SubResource("Gradient_qg33y")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="Gradient" id="Gradient_ntej3"]
+offsets = PackedFloat32Array(0, 0.607287)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vpcxg"]
+noise_type = 4
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_key7p"]
+in_3d_space = true
+color_ramp = SubResource("Gradient_ntej3")
+noise = SubResource("FastNoiseLite_vpcxg")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xkuag"]
+shader = ExtResource("3_0raiu")
+shader_parameter/noise_amount = 0.523
+shader_parameter/gradient = SubResource("GradientTexture2D_imqng")
+shader_parameter/noise = SubResource("NoiseTexture2D_key7p")
 
 [node name="base_player" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_1yq76")
@@ -77,9 +104,28 @@ linear_limit_y/enabled = false
 linear_limit_z/enabled = false
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Head/Camera3D"]
+light_color = Color(0.481789, 0.481789, 0.481789, 1)
 light_energy = 0.1
 shadow_enabled = true
+spot_range = 6.0
 spot_angle = 70.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Head/Camera3D"]
+visible = false
+light_energy = 1.293
+shadow_enabled = true
+spot_range = 16.559
+spot_angle = 77.04
+
+[node name="ColorRect" type="ColorRect" parent="Head/Camera3D"]
+visible = false
+material = SubResource("ShaderMaterial_xkuag")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="ItemList" type="ItemList" parent="."]
 visible = false

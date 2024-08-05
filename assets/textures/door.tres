@@ -1,0 +1,23 @@
+[gd_resource type="StandardMaterial3D" load_steps=7 format=3 uid="uid://b2mobpd63c4kh"]
+
+[ext_resource type="Texture2D" uid="uid://c3wj7xp5ka0i4" path="res://assets/textures/TCom_Various_AcousticFoam_512_albedo.jpg" id="1_3iwpx"]
+[ext_resource type="Texture2D" uid="uid://fqf7kbwqyoqs" path="res://assets/textures/TCom_Various_AcousticFoam_512_ao.jpg" id="2_g4oa4"]
+[ext_resource type="Texture2D" uid="uid://b7xojoy2styc2" path="res://assets/textures/TCom_Scifi_Panel_512_height.jpg" id="3_813x7"]
+[ext_resource type="Texture2D" uid="uid://d0wpgmw01rolg" path="res://assets/textures/TCom_Various_AcousticFoam_512_metallic.jpg" id="4_inn3y"]
+[ext_resource type="Texture2D" uid="uid://3ilra6utbk5q" path="res://assets/textures/TCom_Various_AcousticFoam_512_normal.jpg" id="5_wkwq7"]
+[ext_resource type="Texture2D" uid="uid://bwnpn2mywh3vn" path="res://assets/textures/TCom_Various_AcousticFoam_512_roughness.jpg" id="6_ceblq"]
+
+[resource]
+albedo_texture = ExtResource("1_3iwpx")
+metallic_specular = 0.2
+metallic_texture = ExtResource("4_inn3y")
+roughness_texture = ExtResource("6_ceblq")
+normal_enabled = true
+normal_texture = ExtResource("5_wkwq7")
+ao_enabled = true
+ao_texture = ExtResource("2_g4oa4")
+heightmap_texture = ExtResource("3_813x7")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0

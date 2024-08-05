@@ -1,0 +1,2491 @@
+[gd_scene load_steps=6 format=3 uid="uid://bo20icdsbpklk"]
+
+[ext_resource type="PackedScene" uid="uid://mmtvuxt3bs2p" path="res://scenes/player/base_player.tscn" id="1_3auen"]
+[ext_resource type="Material" uid="uid://c12oo043hb3xe" path="res://assets/textures/TCom_Scifi_Panel.tres" id="2_ktcfa"]
+[ext_resource type="Material" uid="uid://b2mobpd63c4kh" path="res://assets/textures/door.tres" id="3_85pj1"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_0ywga"]
+material = ExtResource("3_85pj1")
+size = Vector3(0.5, 1, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_afb8j"]
+material = ExtResource("3_85pj1")
+left_to_right = 0.6
+size = Vector3(0.5, 1, 1)
+
+[node name="Level Test Area" type="Node3D"]
+
+[node name="base_player" parent="." instance=ExtResource("1_3auen")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.4554, 1, 43.2473)
+
+[node name="Corridor" type="Node3D" parent="."]
+
+[node name="CorridorBlockout" type="Node3D" parent="Corridor"]
+
+[node name="Forward" type="CSGCombiner3D" parent="Corridor/CorridorBlockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -0.5)
+size = Vector3(16, 5, 4)
+material = ExtResource("2_ktcfa")
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0595856, 0, 0)
+operation = 2
+size = Vector3(16.4147, 5, 3.4)
+material = ExtResource("2_ktcfa")
+
+[node name="CorridorSubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="CorridorSubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.9)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="DoorwaySubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -0.5, 2.123)
+operation = 2
+size = Vector3(2, 4, 2.85571)
+material = ExtResource("2_ktcfa")
+
+[node name="DoorwaySubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.5, -2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall2" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward/Sidewall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="WallPadding" type="CSGCombiner3D" parent="Corridor/CorridorBlockout/Forward"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.5, 1.283)
+visible = false
+
+[node name="Middle" type="CSGMesh3D" parent="Corridor/CorridorBlockout/Forward/WallPadding"]
+mesh = SubResource("PrismMesh_0ywga")
+
+[node name="Bottom" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward/WallPadding/Middle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -1, 0)
+material = ExtResource("3_85pj1")
+
+[node name="Middle3" type="CSGMesh3D" parent="Corridor/CorridorBlockout/Forward/WallPadding"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.38419e-07, 0, -1)
+mesh = SubResource("PrismMesh_0ywga")
+
+[node name="Bottom" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward/WallPadding/Middle3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -1, 0)
+material = ExtResource("3_85pj1")
+
+[node name="Middle4" type="CSGMesh3D" parent="Corridor/CorridorBlockout/Forward/WallPadding"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.57628e-07, 0, -2)
+mesh = SubResource("PrismMesh_0ywga")
+
+[node name="Bottom" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward/WallPadding/Middle4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -1, 0)
+material = ExtResource("3_85pj1")
+
+[node name="Middle5" type="CSGMesh3D" parent="Corridor/CorridorBlockout/Forward/WallPadding"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.57628e-07, 0, -3)
+mesh = SubResource("PrismMesh_0ywga")
+
+[node name="Bottom" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward/WallPadding/Middle5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -1, 0)
+material = ExtResource("3_85pj1")
+
+[node name="Middle6" type="CSGMesh3D" parent="Corridor/CorridorBlockout/Forward/WallPadding"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.96046e-07, 0, -4)
+mesh = SubResource("PrismMesh_0ywga")
+
+[node name="Bottom" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward/WallPadding/Middle6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -1, 0)
+material = ExtResource("3_85pj1")
+
+[node name="Middle7" type="CSGMesh3D" parent="Corridor/CorridorBlockout/Forward/WallPadding"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.15256e-07, 0, -5)
+mesh = SubResource("PrismMesh_0ywga")
+
+[node name="Bottom" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward/WallPadding/Middle7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -1, 0)
+material = ExtResource("3_85pj1")
+
+[node name="Middle8" type="CSGMesh3D" parent="Corridor/CorridorBlockout/Forward/WallPadding"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.15256e-07, 0, -6)
+mesh = SubResource("PrismMesh_0ywga")
+
+[node name="Bottom" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward/WallPadding/Middle8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -1, 0)
+material = ExtResource("3_85pj1")
+
+[node name="Middle9" type="CSGMesh3D" parent="Corridor/CorridorBlockout/Forward/WallPadding"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.34465e-07, 0, -7)
+mesh = SubResource("PrismMesh_0ywga")
+
+[node name="Bottom" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward/WallPadding/Middle9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -1, 0)
+material = ExtResource("3_85pj1")
+
+[node name="Middle2" type="CSGMesh3D" parent="Corridor/CorridorBlockout/Forward/WallPadding"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+mesh = SubResource("PrismMesh_0ywga")
+
+[node name="Bottom" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward/WallPadding/Middle2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -1, 0)
+material_override = ExtResource("3_85pj1")
+material = ExtResource("3_85pj1")
+
+[node name="Side" type="CSGMesh3D" parent="Corridor/CorridorBlockout/Forward/WallPadding"]
+transform = Transform3D(0.819152, 0, -0.573576, 0, 1, 0, 0.573576, 0, 0.819152, -0.246481, 0, 1.76748)
+mesh = SubResource("PrismMesh_afb8j")
+
+[node name="Bottom" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward/WallPadding/Side"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -1, 0)
+material = ExtResource("3_85pj1")
+
+[node name="SideSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout/Forward/WallPadding/Side"]
+transform = Transform3D(0.819153, 0, 0.573577, 0, 1, 0, -0.573577, 0, 0.819153, -0.444629, 0.00979388, -0.626893)
+operation = 2
+
+[node name="CorridorBlockout2" type="Node3D" parent="Corridor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 0)
+
+[node name="Forward" type="CSGCombiner3D" parent="Corridor/CorridorBlockout2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout2/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout2/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout2/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -0.5)
+size = Vector3(16, 5, 4)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout2/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0595856, 0, 0)
+operation = 2
+size = Vector3(16.4147, 5, 3.4)
+
+[node name="CorridorSubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout2/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="CorridorSubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout2/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.9)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="DoorwaySubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout2/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.676025, 2)
+operation = 2
+size = Vector3(2, 4.35205, 2)
+
+[node name="DoorwaySubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout2/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.5, -2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout2/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout2/Forward/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall2" type="CSGBox3D" parent="Corridor/CorridorBlockout2/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout2/Forward/Sidewall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="CorridorBlockout3" type="Node3D" parent="Corridor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, 0)
+
+[node name="Forward" type="CSGCombiner3D" parent="Corridor/CorridorBlockout3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout3/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout3/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout3/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -0.5)
+size = Vector3(16, 5, 4)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout3/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0595856, 0, 0)
+operation = 2
+size = Vector3(16.4147, 5, 3.4)
+
+[node name="CorridorSubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout3/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="CorridorSubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout3/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.9)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="DoorwaySubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout3/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.5, 2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout3/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.5, -2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout3/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout3/Forward/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall2" type="CSGBox3D" parent="Corridor/CorridorBlockout3/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout3/Forward/Sidewall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="CorridorBlockout7" type="Node3D" parent="Corridor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 32)
+
+[node name="Forward" type="CSGCombiner3D" parent="Corridor/CorridorBlockout7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout7/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout7/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout7/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -0.5)
+size = Vector3(16, 5, 4)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout7/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0595856, 0, 0)
+operation = 2
+size = Vector3(16.4147, 5, 3.4)
+
+[node name="CorridorSubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout7/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="CorridorSubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout7/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.9)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="DoorwaySubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout7/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.5, 2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout7/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -0.5, -2)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract3" type="CSGBox3D" parent="Corridor/CorridorBlockout7/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -0.5, -2)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout7/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout7/Forward/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall2" type="CSGBox3D" parent="Corridor/CorridorBlockout7/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout7/Forward/Sidewall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="CorridorBlockout12" type="Node3D" parent="Corridor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 64)
+
+[node name="Forward" type="CSGCombiner3D" parent="Corridor/CorridorBlockout12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout12/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout12/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout12/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -0.5)
+size = Vector3(16, 5, 4)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout12/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0595856, 0, 0)
+operation = 2
+size = Vector3(16.4147, 5, 3.4)
+
+[node name="CorridorSubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout12/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="CorridorSubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout12/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0, -1.9)
+operation = 2
+size = Vector3(2.4, 5, 1)
+
+[node name="CorridorSubtract3" type="CSGBox3D" parent="Corridor/CorridorBlockout12/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -1.9)
+operation = 2
+size = Vector3(2.4, 5, 1)
+
+[node name="DoorwaySubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout12/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.5, 2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout12/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -0.5, -2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract3" type="CSGBox3D" parent="Corridor/CorridorBlockout12/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -0.5, -2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout12/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout12/Forward/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall2" type="CSGBox3D" parent="Corridor/CorridorBlockout12/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout12/Forward/Sidewall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="CorridorBlockout14" type="Node3D" parent="Corridor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 80)
+
+[node name="Forward" type="CSGCombiner3D" parent="Corridor/CorridorBlockout14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout14/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout14/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout14/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -0.5)
+size = Vector3(16, 5, 4)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout14/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0595856, 0, 0)
+operation = 2
+size = Vector3(16.4147, 5, 3.4)
+
+[node name="CorridorSubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout14/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="CorridorSubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout14/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.9)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="DoorwaySubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout14/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.5, 2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout14/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -0.5, -2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract3" type="CSGBox3D" parent="Corridor/CorridorBlockout14/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -0.5, -2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout14/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout14/Forward/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall2" type="CSGBox3D" parent="Corridor/CorridorBlockout14/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout14/Forward/Sidewall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="CorridorBlockout15" type="Node3D" parent="Corridor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 80)
+
+[node name="Forward" type="CSGCombiner3D" parent="Corridor/CorridorBlockout15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout15/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout15/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout15/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -0.5)
+size = Vector3(16, 5, 4)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout15/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0595856, 0, 0)
+operation = 2
+size = Vector3(16.4147, 5, 3.4)
+
+[node name="CorridorSubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout15/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="CorridorSubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout15/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.9)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="DoorwaySubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout15/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.5, 2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout15/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -0.5, -2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract3" type="CSGBox3D" parent="Corridor/CorridorBlockout15/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -0.5, -2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout15/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout15/Forward/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall2" type="CSGBox3D" parent="Corridor/CorridorBlockout15/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout15/Forward/Sidewall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="CorridorBlockout13" type="Node3D" parent="Corridor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 64)
+
+[node name="Forward" type="CSGCombiner3D" parent="Corridor/CorridorBlockout13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout13/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout13/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout13/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -0.5)
+size = Vector3(16, 5, 4)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout13/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0595856, 0, 0)
+operation = 2
+size = Vector3(16.4147, 5, 3.4)
+
+[node name="CorridorSubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout13/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="CorridorSubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout13/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.9)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="DoorwaySubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout13/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.5, 2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout13/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -0.5, -2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract3" type="CSGBox3D" parent="Corridor/CorridorBlockout13/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -0.5, -2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout13/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, -0.5)
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout13/Forward/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall2" type="CSGBox3D" parent="Corridor/CorridorBlockout13/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout13/Forward/Sidewall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="CorridorBlockout8" type="Node3D" parent="Corridor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 32)
+
+[node name="Forward" type="CSGCombiner3D" parent="Corridor/CorridorBlockout8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout8/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout8/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout8/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -0.5)
+size = Vector3(16, 5, 4)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout8/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0595856, 0, 0)
+operation = 2
+size = Vector3(16.4147, 5, 3.4)
+
+[node name="CorridorSubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout8/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="CorridorSubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout8/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.9)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="DoorwaySubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout8/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.5, 2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout8/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.5, -2)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract4" type="CSGBox3D" parent="Corridor/CorridorBlockout8/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -0.5, -2)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract3" type="CSGBox3D" parent="Corridor/CorridorBlockout8/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.5, -2)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout8/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, -0.5)
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout8/Forward/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall2" type="CSGBox3D" parent="Corridor/CorridorBlockout8/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout8/Forward/Sidewall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="CorridorBlockout10" type="Node3D" parent="Corridor"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -32, 0, 48)
+
+[node name="Forward" type="CSGCombiner3D" parent="Corridor/CorridorBlockout10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout10/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout10/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout10/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -0.5)
+size = Vector3(16, 5, 4)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout10/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0595856, 0, 0)
+operation = 2
+size = Vector3(16.4147, 5, 3.4)
+
+[node name="CorridorSubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout10/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="CorridorSubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout10/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0, -1.9)
+operation = 2
+size = Vector3(3, 5, 1)
+
+[node name="CorridorSubtract3" type="CSGBox3D" parent="Corridor/CorridorBlockout10/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -1.9)
+operation = 2
+size = Vector3(3, 5, 1)
+
+[node name="DoorwaySubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout10/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.5, 2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout10/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.5, -2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract3" type="CSGBox3D" parent="Corridor/CorridorBlockout10/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.5, -2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout10/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout10/Forward/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall2" type="CSGBox3D" parent="Corridor/CorridorBlockout10/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout10/Forward/Sidewall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="CorridorBlockout9" type="Node3D" parent="Corridor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, 32)
+
+[node name="Forward" type="CSGCombiner3D" parent="Corridor/CorridorBlockout9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout9/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout9/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout9/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -0.5)
+size = Vector3(16, 5, 4)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout9/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0595856, 0, 0)
+operation = 2
+size = Vector3(16.4147, 5, 3.4)
+
+[node name="CorridorSubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout9/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8)
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="CorridorSubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout9/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.9)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="DoorwaySubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout9/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.5, 2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout9/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -0.5, -2)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract3" type="CSGBox3D" parent="Corridor/CorridorBlockout9/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -0.5, -2)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout9/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout9/Forward/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall2" type="CSGBox3D" parent="Corridor/CorridorBlockout9/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3, -0.5)
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout9/Forward/Sidewall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Side2" type="CSGCombiner3D" parent="Corridor/CorridorBlockout9"]
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout9/Side2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.53674e-07, -0.5, 5)
+size = Vector3(4, 1, 6)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout9/Side2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 5)
+size = Vector3(4, 1, 6)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout9/Side2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 5)
+size = Vector3(4, 5, 6)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout9/Side2/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.00646973)
+operation = 2
+size = Vector3(3.4, 5, 6.74243)
+
+[node name="CorridorSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout9/Side2/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.420837, 3)
+operation = 2
+size = Vector3(1, 6.15833, 2)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout9/Side2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2.5, 7.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout9/Side2/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="CorridorBlockout5" type="Node3D" parent="Corridor"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 16, 0, 16)
+
+[node name="Forward" type="CSGCombiner3D" parent="Corridor/CorridorBlockout5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout5/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout5/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout5/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -0.5)
+size = Vector3(16, 5, 4)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout5/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0595856, 0, 0)
+operation = 2
+size = Vector3(16.4147, 5, 3.4)
+
+[node name="CorridorSubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout5/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="CorridorSubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout5/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.9)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="DoorwaySubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout5/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.5, 2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout5/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.5, -2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout5/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout5/Forward/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall2" type="CSGBox3D" parent="Corridor/CorridorBlockout5/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout5/Forward/Sidewall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="CorridorBlockout6" type="Node3D" parent="Corridor"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 16, 0, 32)
+
+[node name="Forward" type="CSGCombiner3D" parent="Corridor/CorridorBlockout6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -0.5)
+size = Vector3(16, 5, 4)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0595856, 0, 0)
+operation = 2
+size = Vector3(16.4147, 5, 3.4)
+
+[node name="CorridorSubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8)
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="CorridorSubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.9)
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="DoorwaySubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.5, 2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.5, -2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, -0.5)
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Forward/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall2" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Forward/Sidewall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Side1" type="CSGCombiner3D" parent="Corridor/CorridorBlockout6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Side1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -5.5)
+size = Vector3(4, 1, 6)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Side1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6, -5.5)
+size = Vector3(4, 1, 6)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Side1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -5.5)
+size = Vector3(4, 5, 6)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Side1/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.133514)
+operation = 2
+size = Vector3(3.4, 5, 6.54016)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Side1"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.5, 3, -8)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Side1/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Side2" type="CSGCombiner3D" parent="Corridor/CorridorBlockout6"]
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Side2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.53674e-07, -0.5, 5)
+size = Vector3(4, 1, 6)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Side2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 5)
+size = Vector3(4, 1, 6)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Side2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 5)
+size = Vector3(4, 5, 6)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Side2/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.00646973)
+operation = 2
+size = Vector3(3.4, 5, 6.74243)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Side2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2.5, 7.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout6/Side2/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="CorridorBlockout11" type="Node3D" parent="Corridor"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -32, 0, 64)
+
+[node name="Forward" type="CSGCombiner3D" parent="Corridor/CorridorBlockout11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -0.5)
+size = Vector3(16, 5, 4)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0595856, 0, 0)
+operation = 2
+size = Vector3(16.4147, 5, 3.4)
+
+[node name="CorridorSubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8)
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="CorridorSubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.9)
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="DoorwaySubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.5, 2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.5, -2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, -0.5)
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Forward/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall2" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Forward/Sidewall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Side1" type="CSGCombiner3D" parent="Corridor/CorridorBlockout11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Side1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -5.5)
+size = Vector3(4, 1, 6)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Side1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6, -5.5)
+size = Vector3(4, 1, 6)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Side1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -5.5)
+size = Vector3(4, 5, 6)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Side1/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.133514)
+operation = 2
+size = Vector3(3.4, 5, 6.54016)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Side1"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.5, 3, -8)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Side1/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Side2" type="CSGCombiner3D" parent="Corridor/CorridorBlockout11"]
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Side2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.53674e-07, -0.5, 5)
+size = Vector3(4, 1, 6)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Side2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 5)
+size = Vector3(4, 1, 6)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Side2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 5)
+size = Vector3(4, 5, 6)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Side2/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.00646973)
+operation = 2
+size = Vector3(3.4, 5, 6.74243)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Side2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2.5, 7.5)
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout11/Side2/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="CorridorBlockout16" type="Node3D" parent="Corridor"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -32, 0, 80)
+
+[node name="Forward" type="CSGCombiner3D" parent="Corridor/CorridorBlockout16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout16/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout16/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout16/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -0.5)
+size = Vector3(16, 5, 4)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout16/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.647766, 0, 0)
+operation = 2
+size = Vector3(19, 5, 3.4)
+
+[node name="CorridorSubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout16/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8)
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="CorridorSubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout16/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.9)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="DoorwaySubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout16/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.5, 2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout16/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.5, -2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout16/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7, 3, -0.5)
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout16/Forward/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall2" type="CSGBox3D" parent="Corridor/CorridorBlockout16/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout16/Forward/Sidewall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Side2" type="CSGCombiner3D" parent="Corridor/CorridorBlockout16"]
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout16/Side2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.53674e-07, -0.5, 5)
+size = Vector3(4, 1, 6)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout16/Side2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 5)
+size = Vector3(4, 1, 6)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout16/Side2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 5)
+size = Vector3(4, 5, 6)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout16/Side2/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.00646973)
+operation = 2
+size = Vector3(3.4, 5, 6.74243)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout16/Side2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2.5, 7.5)
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout16/Side2/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="CorridorBlockout4" type="Node3D" parent="Corridor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0)
+
+[node name="Forward" type="CSGCombiner3D" parent="Corridor/CorridorBlockout4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout4/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout4/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6, -0.5)
+size = Vector3(16, 1, 4)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout4/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -0.5)
+size = Vector3(16, 5, 4)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout4/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0595856, 0, 0)
+operation = 2
+size = Vector3(16.4147, 5, 3.4)
+
+[node name="CorridorSubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout4/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8)
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="CorridorSubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout4/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.9)
+visible = false
+operation = 2
+size = Vector3(3.4, 5, 1)
+
+[node name="DoorwaySubtract1" type="CSGBox3D" parent="Corridor/CorridorBlockout4/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1, -0.5, 2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="DoorwaySubtract2" type="CSGBox3D" parent="Corridor/CorridorBlockout4/Forward/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.5, -2)
+visible = false
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout4/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, -0.5)
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout4/Forward/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Sidewall2" type="CSGBox3D" parent="Corridor/CorridorBlockout4/Forward"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3, -0.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout4/Forward/Sidewall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Side2" type="CSGCombiner3D" parent="Corridor/CorridorBlockout4"]
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Corridor/CorridorBlockout4/Side2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.53674e-07, -0.5, 5)
+size = Vector3(4, 1, 6)
+
+[node name="Ceiling" type="CSGBox3D" parent="Corridor/CorridorBlockout4/Side2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 5)
+size = Vector3(4, 1, 6)
+
+[node name="Wall" type="CSGBox3D" parent="Corridor/CorridorBlockout4/Side2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 5)
+size = Vector3(4, 5, 6)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout4/Side2/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.00646973)
+operation = 2
+size = Vector3(3.4, 5, 6.74243)
+
+[node name="Sidewall1" type="CSGBox3D" parent="Corridor/CorridorBlockout4/Side2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2.5, 7.5)
+visible = false
+size = Vector3(1, 5, 4)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Corridor/CorridorBlockout4/Side2/Sidewall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148582, -0.5, 0)
+operation = 2
+size = Vector3(2, 4, 2)
+
+[node name="Room" type="Node3D" parent="."]
+
+[node name="RoomBlockout1" type="Node3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+
+[node name="Top" type="Node3D" parent="Room/RoomBlockout1"]
+
+[node name="SpawnRoom" type="CSGCombiner3D" parent="Room/RoomBlockout1/Top"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Room/RoomBlockout1/Top/SpawnRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.74652, 3, -2.5)
+size = Vector3(0.493042, 5, 10)
+
+[node name="Wall2" type="CSGBox3D" parent="Room/RoomBlockout1/Top/SpawnRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3, -2.5)
+size = Vector3(1, 5, 10)
+
+[node name="Wall3" type="CSGBox3D" parent="Room/RoomBlockout1/Top/SpawnRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 3)
+size = Vector3(9, 5, 1)
+
+[node name="Wall4" type="CSGBox3D" parent="Room/RoomBlockout1/Top/SpawnRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, -8)
+size = Vector3(9, 5, 1)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Top/SpawnRoom/Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -0.606445, -0.00561523)
+operation = 2
+size = Vector3(2, 4.21289, 1.75537)
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout1/Top/SpawnRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2.5)
+size = Vector3(9, 1, 12)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room/RoomBlockout1/Top/SpawnRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 6, -2.5)
+size = Vector3(9, 1, 12)
+
+[node name="MediumRoom" type="CSGCombiner3D" parent="Room/RoomBlockout1/Top"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Room/RoomBlockout1/Top/MediumRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.76392, 3, -5)
+size = Vector3(0.527832, 5, 5)
+
+[node name="Wall2" type="CSGBox3D" parent="Room/RoomBlockout1/Top/MediumRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.72803, 3, -5)
+size = Vector3(0.456055, 5, 5)
+
+[node name="Wall4" type="CSGBox3D" parent="Room/RoomBlockout1/Top/MediumRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3, -8)
+size = Vector3(11, 5, 1)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Top/MediumRoom/Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -0.5, -0.00561523)
+operation = 2
+size = Vector3(2, 4, 1.75537)
+
+[node name="Wall3" type="CSGBox3D" parent="Room/RoomBlockout1/Top/MediumRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.99707, 3, -2.28882)
+size = Vector3(9.875, 5, 0.422363)
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout1/Top/MediumRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -5)
+size = Vector3(11, 1, 7)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room/RoomBlockout1/Top/MediumRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 6, -5)
+size = Vector3(11, 1, 7)
+
+[node name="Middle" type="Node3D" parent="Room/RoomBlockout1"]
+
+[node name="MediumRoom1" type="CSGCombiner3D" parent="Room/RoomBlockout1/Middle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.70599, 3.25433, -0.5)
+size = Vector3(0.411987, 5.50867, 6)
+
+[node name="Wall2" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.71606, 3, -0.5)
+size = Vector3(0.432129, 5, 6)
+
+[node name="Wall3" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 3)
+size = Vector3(11, 5, 1)
+
+[node name="CorridorSubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/MediumRoom1/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -0.172211, 0)
+operation = 2
+size = Vector3(4, 5.58246, 1.69427)
+
+[node name="Wall4" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -2.82861)
+size = Vector3(10, 5, 0.657227)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/MediumRoom1/Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.642822, 0)
+operation = 2
+size = Vector3(2, 4.28564, 1)
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+size = Vector3(11, 1, 7)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 6, 0)
+size = Vector3(11, 1, 7)
+
+[node name="StorageRoom1" type="CSGCombiner3D" parent="Room/RoomBlockout1/Middle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, -0.5, -5.5)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/StorageRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.70599, 3, 0.5)
+size = Vector3(0.411987, 5, 4)
+
+[node name="Wall2" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/StorageRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.71606, 3, 0.5)
+size = Vector3(0.432129, 5, 4)
+
+[node name="Wall3" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/StorageRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, 2.78171)
+size = Vector3(10, 5, 0.563416)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/StorageRoom1/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.5, -0.0688705)
+operation = 2
+size = Vector3(2, 4, 1.50127)
+
+[node name="Wall4" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/StorageRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -1.5)
+size = Vector3(10, 5, 2)
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/StorageRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+size = Vector3(11, 1, 7)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/StorageRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 6, 0)
+size = Vector3(11, 1, 7)
+
+[node name="LargeRoom" type="CSGCombiner3D" parent="Room/RoomBlockout1/Middle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.5, -0.5, 6.5)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/LargeRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.7786, 3, -2.5)
+size = Vector3(0.557129, 5, 10)
+
+[node name="CorridorSubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/LargeRoom/Wall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.126465, -0.0123291, -2.5)
+operation = 2
+size = Vector3(1.60449, 5.17212, 3)
+
+[node name="Wall2" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/LargeRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, -2.5)
+size = Vector3(1, 5, 10)
+
+[node name="CorridorSubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/LargeRoom/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03125, 0, 1.5)
+operation = 2
+size = Vector3(1.96484, 5, 3)
+
+[node name="Wall3" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/LargeRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 3, 3)
+size = Vector3(18, 5, 1)
+
+[node name="Wall4" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/LargeRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3, -7.79309)
+size = Vector3(19, 5, 0.586182)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/LargeRoom/Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, -0.587646, 0)
+operation = 2
+size = Vector3(2, 4.17529, 1.127)
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/LargeRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.76123, 0, -2.27295)
+size = Vector3(18.5225, 1, 11.5459)
+
+[node name="FloorSubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/LargeRoom/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.76123, -0.224762, 0)
+operation = 2
+size = Vector3(1, 2.12555, 11.5459)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/LargeRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.76123, 6, -2.27295)
+size = Vector3(18.5225, 1, 11.5459)
+
+[node name="CeilingSubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/LargeRoom/Ceiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.76123, 0.199885, 0)
+operation = 2
+size = Vector3(1, 2.12555, 11.5459)
+
+[node name="MediumRoom2" type="CSGCombiner3D" parent="Room/RoomBlockout1/Middle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/MediumRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 3, -5)
+size = Vector3(1, 5, 5)
+
+[node name="Wall2" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/MediumRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.70557, 3, -5)
+size = Vector3(0.411133, 5, 5)
+
+[node name="Wall4" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/MediumRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -8)
+size = Vector3(13, 5, 1)
+
+[node name="Wall3" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/MediumRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -2.19055)
+size = Vector3(13, 5, 0.618896)
+
+[node name="Wall5" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/MediumRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 2.41455, -2.21942)
+operation = 2
+size = Vector3(2, 4.1709, 1.14148)
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/MediumRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0441895, 0, -5.19672)
+size = Vector3(12.9116, 1, 6.60657)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/MediumRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -5.19672)
+size = Vector3(13, 1, 6.60657)
+
+[node name="StorageRoom2" type="CSGCombiner3D" parent="Room/RoomBlockout1/Middle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.5, -0.5, 3.5)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/StorageRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 0.5)
+size = Vector3(1, 5, 10)
+
+[node name="Wall2" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/StorageRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.80023, 3, 0.5)
+size = Vector3(0.600464, 5, 10)
+
+[node name="CorridorSubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/StorageRoom2/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0174713, -0.0626526, -2.5)
+operation = 2
+size = Vector3(1.44943, 5.43219, 3)
+
+[node name="Wall3" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/StorageRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 3, 6)
+size = Vector3(5, 5, 1)
+
+[node name="Wall4" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/StorageRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 3, -4.81177)
+size = Vector3(5, 5, 0.623535)
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/StorageRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.77661, 0, 0.5)
+size = Vector3(4.55322, 1, 12)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room/RoomBlockout1/Middle/StorageRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.77661, 6, 0.5)
+size = Vector3(4.55322, 1, 12)
+
+[node name="Corridor" type="Node3D" parent="Room/RoomBlockout1"]
+
+[node name="Corridor1" type="CSGCombiner3D" parent="Room/RoomBlockout1/Corridor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -0.5, 3.5)
+use_collision = true
+
+[node name="Floor1" type="CSGBox3D" parent="Room/RoomBlockout1/Corridor/Corridor1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, 2)
+size = Vector3(22, 1, 3)
+
+[node name="Ceiling1" type="CSGBox3D" parent="Room/RoomBlockout1/Corridor/Corridor1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 6, 2)
+size = Vector3(22, 1, 3)
+
+[node name="Wall1" type="CSGBox3D" parent="Room/RoomBlockout1/Corridor/Corridor1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 3, 2)
+size = Vector3(23, 5, 3)
+
+[node name="WallSubtract2" type="CSGBox3D" parent="Room/RoomBlockout1/Corridor/Corridor1/Wall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, -0.273933, -1.763)
+operation = 2
+size = Vector3(4, 5.73676, 2.06348)
+
+[node name="WallSubtract3" type="CSGBox3D" parent="Room/RoomBlockout1/Corridor/Corridor1/Wall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.0140076, 1.41984)
+operation = 2
+size = Vector3(2.4, 5.31598, 1)
+
+[node name="WallSubtract1" type="CSGBox3D" parent="Room/RoomBlockout1/Corridor/Corridor1/Wall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.363135, 0.237244, 0)
+operation = 2
+size = Vector3(23.1263, 5.47449, 2.4)
+
+[node name="DoorwaySubtract1" type="CSGBox3D" parent="Room/RoomBlockout1/Corridor/Corridor1/Wall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, -0.807617, 1.09763)
+operation = 2
+size = Vector3(2, 4.61523, 1)
+
+[node name="DoorwaySubtract2" type="CSGBox3D" parent="Room/RoomBlockout1/Corridor/Corridor1/Wall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.807617, 1.09763)
+operation = 2
+size = Vector3(2, 4.61523, 1)
+
+[node name="Corridor2" type="CSGCombiner3D" parent="Room/RoomBlockout1/Corridor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -0.5, 3.5)
+use_collision = true
+
+[node name="Floor2" type="CSGBox3D" parent="Room/RoomBlockout1/Corridor/Corridor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 8.5)
+size = Vector3(3, 1, 10)
+
+[node name="Ceiling2" type="CSGBox3D" parent="Room/RoomBlockout1/Corridor/Corridor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 6, 8.5)
+size = Vector3(3, 1, 10)
+
+[node name="Wall2" type="CSGBox3D" parent="Room/RoomBlockout1/Corridor/Corridor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 3, 8.5)
+size = Vector3(3, 5, 10)
+
+[node name="WallSubtract1" type="CSGBox3D" parent="Room/RoomBlockout1/Corridor/Corridor2/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.299999)
+operation = 2
+size = Vector3(2.4, 5, 10)
+
+[node name="WallSubtract2" type="CSGBox3D" parent="Room/RoomBlockout1/Corridor/Corridor2/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -0.5)
+operation = 2
+size = Vector3(2, 5, 2.4)
+
+[node name="Corridor3" type="CSGCombiner3D" parent="Room/RoomBlockout1/Corridor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -0.5, 3.5)
+use_collision = true
+
+[node name="Floor3" type="CSGBox3D" parent="Room/RoomBlockout1/Corridor/Corridor3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0, 8.03912)
+size = Vector3(25, 1, 3.07825)
+
+[node name="Ceiling3" type="CSGBox3D" parent="Room/RoomBlockout1/Corridor/Corridor3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 6, 8)
+size = Vector3(25, 1, 3)
+
+[node name="Wall3" type="CSGBox3D" parent="Room/RoomBlockout1/Corridor/Corridor3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 3, 8)
+size = Vector3(25, 5, 3)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Corridor/Corridor3/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.283363, 0, 0)
+operation = 2
+size = Vector3(24.9667, 5, 2.4)
+
+[node name="DoorwaySubtract1" type="CSGBox3D" parent="Room/RoomBlockout1/Corridor/Corridor3/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, -0.561768, 1)
+operation = 2
+size = Vector3(2, 4.12354, 1)
+
+[node name="DoorwaySubtract2" type="CSGBox3D" parent="Room/RoomBlockout1/Corridor/Corridor3/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, -0.773926, 1)
+operation = 2
+size = Vector3(2, 4.54785, 1)
+
+[node name="DoorwaySubtract3" type="CSGBox3D" parent="Room/RoomBlockout1/Corridor/Corridor3/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.773926, 1)
+operation = 2
+size = Vector3(2, 4.54785, 1)
+
+[node name="DoorwaySubtract4" type="CSGBox3D" parent="Room/RoomBlockout1/Corridor/Corridor3/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, -0.773926, 1)
+operation = 2
+size = Vector3(2, 4.54785, 1)
+
+[node name="Bottom" type="Node3D" parent="Room/RoomBlockout1"]
+
+[node name="SmallRoom1" type="CSGCombiner3D" parent="Room/RoomBlockout1/Bottom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.5, -0.5, 12.5)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28125, 3, 4)
+size = Vector3(0.4375, 5, 5)
+
+[node name="Wall2" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3, 4)
+size = Vector3(1, 5, 5)
+
+[node name="Wall3" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 3, 7)
+size = Vector3(6, 5, 1)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom1/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.0213013)
+operation = 2
+size = Vector3(2, 4, 1.85681)
+
+[node name="Wall4" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 3, 1)
+size = Vector3(6, 5, 1)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom1/Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.570313, 0.0214233)
+operation = 2
+size = Vector3(2, 4.14063, 1.245)
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 4)
+size = Vector3(6, 1, 7)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 6, 4)
+size = Vector3(6, 1, 7)
+
+[node name="SmallRoom2" type="CSGCombiner3D" parent="Room/RoomBlockout1/Bottom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5, -0.5, 12.5)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27789, 3, 4)
+size = Vector3(0.444214, 5, 5)
+
+[node name="Wall2" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.72534, 3, 4)
+size = Vector3(0.450684, 5, 5)
+
+[node name="Wall3" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 3, 7)
+size = Vector3(6, 5, 1)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom2/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.0213013)
+operation = 2
+size = Vector3(2, 4, 1.85681)
+
+[node name="Wall4" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 3, 1)
+size = Vector3(6, 5, 1)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom2/Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.657471, 0.0214233)
+operation = 2
+size = Vector3(2, 4.31494, 1.245)
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 4)
+size = Vector3(6, 1, 7)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 6, 4)
+size = Vector3(6, 1, 7)
+
+[node name="SmallRoom3" type="CSGCombiner3D" parent="Room/RoomBlockout1/Bottom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.5, -0.5, 12.5)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27789, 3, 4)
+size = Vector3(0.444214, 5, 5)
+
+[node name="Wall2" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.72534, 3, 4)
+size = Vector3(0.450684, 5, 5)
+
+[node name="Wall3" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 3, 7)
+size = Vector3(6, 5, 1)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom3/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.0213013)
+operation = 2
+size = Vector3(2, 4, 1.85681)
+
+[node name="Wall4" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 3, 1)
+size = Vector3(6, 5, 1)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom3/Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.727051, 0.0214233)
+operation = 2
+size = Vector3(2, 4.4541, 1.245)
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, 4)
+size = Vector3(6, 1, 7)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 6, 4)
+size = Vector3(6, 1, 7)
+
+[node name="SmallRoom4" type="CSGCombiner3D" parent="Room/RoomBlockout1/Bottom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.5, -0.5, 12.5)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.22708, 3, 4)
+size = Vector3(0.545837, 5, 5)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom4/Wall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2799, -0.620117, -0.5)
+operation = 2
+size = Vector3(1.19133, 4.24023, 2)
+
+[node name="Wall2" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.72534, 3, 4)
+size = Vector3(0.450684, 5, 5)
+
+[node name="Wall3" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 3, 7)
+size = Vector3(6, 5, 1)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom4/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.0213013)
+operation = 2
+size = Vector3(2, 4, 1.85681)
+
+[node name="Wall4" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 3, 1)
+size = Vector3(6, 5, 1)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom4/Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.661377, 0.0214233)
+operation = 2
+size = Vector3(2, 4.32275, 1.245)
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7644, 0, 4)
+size = Vector3(5.47119, 1, 7)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/SmallRoom4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7644, 6, 4)
+size = Vector3(5.47119, 1, 7)
+
+[node name="StorageRoom" type="CSGCombiner3D" parent="Room/RoomBlockout1/Bottom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.5, -0.5, 12.5)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/StorageRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.27789, 3, 4)
+size = Vector3(0.444214, 5, 5)
+
+[node name="Wall2" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/StorageRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8053, 3, 4)
+size = Vector3(0.610596, 5, 5)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/StorageRoom/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0120239, -0.554199, -0.5)
+operation = 2
+size = Vector3(0.856812, 4.1084, 2)
+
+[node name="Wall3" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/StorageRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 7)
+size = Vector3(5, 5, 1)
+
+[node name="Wall4" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/StorageRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 1)
+size = Vector3(5, 5, 1)
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/StorageRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.77222, 0, 4)
+size = Vector3(4.54443, 1, 7)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/StorageRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.77222, 6, 4)
+size = Vector3(4.54443, 1, 7)
+
+[node name="MediumRoom1" type="CSGCombiner3D" parent="Room/RoomBlockout1/Bottom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 12.5)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3, 1)
+size = Vector3(1, 5, 11)
+
+[node name="Wall2" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, 1)
+size = Vector3(1, 5, 11)
+
+[node name="Wall3" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3, 7)
+size = Vector3(8, 5, 1)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/MediumRoom1/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.624634, -0.107788)
+operation = 2
+size = Vector3(2, 4.24927, 1.77563)
+
+[node name="Wall4" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3, -5)
+size = Vector3(8, 5, 1)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/MediumRoom1/Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.626709, 0.0612793)
+operation = 2
+size = Vector3(2, 4.25342, 1.65479)
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 1)
+size = Vector3(8, 1, 13)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 6, 1)
+size = Vector3(8, 1, 13)
+
+[node name="MediumRoom2" type="CSGCombiner3D" parent="Room/RoomBlockout1/Bottom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, -0.5, 12.5)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/MediumRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3, 1)
+size = Vector3(1, 5, 11)
+
+[node name="Wall2" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/MediumRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, 1)
+size = Vector3(1, 5, 11)
+
+[node name="Wall3" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/MediumRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3, 7)
+size = Vector3(8, 5, 1)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/MediumRoom2/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.555176, 0.161743)
+operation = 2
+size = Vector3(2, 4.11035, 1.64282)
+
+[node name="Wall4" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/MediumRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3, -5)
+size = Vector3(8, 5, 1)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/MediumRoom2/Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.553955, 0.0149841)
+operation = 2
+size = Vector3(2, 4.10791, 1.47614)
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/MediumRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 1)
+size = Vector3(8, 1, 13)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room/RoomBlockout1/Bottom/MediumRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 6, 1)
+size = Vector3(8, 1, 13)
+
+[node name="RoomBlockout2" type="Node3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 43)
+
+[node name="Left" type="Node3D" parent="Room/RoomBlockout2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 3)
+
+[node name="MediumRoom1" type="CSGCombiner3D" parent="Room/RoomBlockout2/Left"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.5, -0.5, -1.5)
+use_collision = true
+
+[node name="Wall2" type="CSGBox3D" parent="Room/RoomBlockout2/Left/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3, -2)
+size = Vector3(1, 5, 11)
+
+[node name="CorridorSubtract" type="CSGBox3D" parent="Room/RoomBlockout2/Left/MediumRoom1/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00115967, -0.0814514, -2)
+operation = 2
+size = Vector3(1.29749, 5.43854, 3)
+
+[node name="Wall1" type="CSGBox3D" parent="Room/RoomBlockout2/Left/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, -2)
+size = Vector3(1, 5, 11)
+
+[node name="CorridorSubtract" type="CSGBox3D" parent="Room/RoomBlockout2/Left/MediumRoom1/Wall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0973206, -0.127045, -2)
+operation = 2
+size = Vector3(1.55231, 5.42572, 3)
+
+[node name="Wall3" type="CSGBox3D" parent="Room/RoomBlockout2/Left/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 3.79077)
+size = Vector3(9, 5, 0.581543)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout2/Left/MediumRoom1/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -0.567871, 0.118103)
+operation = 2
+size = Vector3(2, 4.13574, 0.9823)
+
+[node name="Wall4" type="CSGBox3D" parent="Room/RoomBlockout2/Left/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, -8)
+size = Vector3(9, 5, 1)
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout2/Left/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2.23804)
+size = Vector3(9, 1, 12.5239)
+
+[node name="LargeRoom1" type="CSGCombiner3D" parent="Room/RoomBlockout2/Left"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.5, -0.5, 10.5)
+use_collision = true
+
+[node name="Wall2" type="CSGBox3D" parent="Room/RoomBlockout2/Left/LargeRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.7991, 3, -2.5)
+size = Vector3(0.598145, 5, 10)
+
+[node name="CorridorSubtract" type="CSGBox3D" parent="Room/RoomBlockout2/Left/LargeRoom1/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0307617, -0.0608521, 3.5)
+operation = 2
+size = Vector3(1.24609, 5.67224, 3)
+
+[node name="Wall1" type="CSGBox3D" parent="Room/RoomBlockout2/Left/LargeRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, -2.5)
+size = Vector3(1, 5, 10)
+
+[node name="CorridorSubtract" type="CSGBox3D" parent="Room/RoomBlockout2/Left/LargeRoom1/Wall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0372314, 0.133636, -1.5)
+operation = 2
+size = Vector3(1.4187, 5.76813, 3)
+
+[node name="Wall3" type="CSGBox3D" parent="Room/RoomBlockout2/Left/LargeRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 3, 3)
+size = Vector3(22, 5, 1)
+
+[node name="CorridorSubtract1" type="CSGBox3D" parent="Room/RoomBlockout2/Left/LargeRoom1/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, -0.126556, 0.0145264)
+operation = 2
+size = Vector3(3, 5.50677, 1.43042)
+
+[node name="CorridorSubtract2" type="CSGBox3D" parent="Room/RoomBlockout2/Left/LargeRoom1/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, -0.126556, 0.0145264)
+operation = 2
+size = Vector3(3, 5.50677, 1.43042)
+
+[node name="Wall4" type="CSGBox3D" parent="Room/RoomBlockout2/Left/LargeRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 3, -7.78369)
+size = Vector3(22, 5, 0.567383)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout2/Left/LargeRoom1/Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -0.528076, -0.019165)
+operation = 2
+size = Vector3(2, 4.05615, 1.1106)
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout2/Left/LargeRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -2.26978)
+size = Vector3(22, 1, 11.5396)
+
+[node name="Middle" type="Node3D" parent="Room/RoomBlockout2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+
+[node name="MediumRoom1" type="CSGCombiner3D" parent="Room/RoomBlockout2/Middle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5, -0.5, 15.5)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.706, 3, -0.5)
+size = Vector3(0.411987, 5, 6)
+
+[node name="CorridorSubtract" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/MediumRoom1/Wall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0461578, 0.0736084, -0.5)
+operation = 2
+size = Vector3(0.868622, 5.32056, 3)
+
+[node name="Wall3" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, 1)
+size = Vector3(17, 5, 1)
+
+[node name="Wall5" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 3, 0)
+size = Vector3(1, 5, 5)
+
+[node name="CorridorSubtract" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/MediumRoom1/Wall5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0529175, -0.0880127, -1)
+operation = 2
+size = Vector3(1.31091, 5.78784, 3)
+
+[node name="Wall4" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 3, -2.82861)
+size = Vector3(16, 5, 0.657227)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/MediumRoom1/Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.701172, -0.104034)
+operation = 2
+size = Vector3(2, 4.40234, 1.29034)
+
+[node name="CorridorSubtract" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/MediumRoom1/Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0.0487061, 0.0559387)
+operation = 2
+size = Vector3(3, 5.7063, 1.44061)
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -1)
+size = Vector3(16, 1, 5)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/MediumRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 6, 0)
+visible = false
+size = Vector3(11, 1, 7)
+
+[node name="StorageRoom1" type="CSGCombiner3D" parent="Room/RoomBlockout2/Middle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5, -0.5, 9.5)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/StorageRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.70599, 3, -0.5)
+size = Vector3(0.411987, 5, 6)
+
+[node name="Wall2" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/StorageRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.71606, 3, -0.5)
+size = Vector3(0.432129, 5, 6)
+
+[node name="Wall3" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/StorageRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3, 2.78171)
+size = Vector3(11, 5, 0.563416)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/StorageRoom1/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -0.637939, -0.030098)
+operation = 2
+size = Vector3(2, 4.27588, 0.932968)
+
+[node name="Wall4" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/StorageRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -3)
+size = Vector3(10, 5, 1)
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/StorageRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+size = Vector3(11, 1, 7)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/StorageRoom1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 6, 0)
+visible = false
+size = Vector3(11, 1, 7)
+
+[node name="LargeRoom" type="CSGCombiner3D" parent="Room/RoomBlockout2/Middle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.5, -0.5, 2.5)
+use_collision = true
+
+[node name="Wall2" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/LargeRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.762, 3, -4)
+size = Vector3(0.523926, 5, 13)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/LargeRoom/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0275879, -0.584717, -3.5)
+operation = 2
+size = Vector3(0.846191, 4.16943, 2)
+
+[node name="Wall5" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/LargeRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 3, -4)
+size = Vector3(1, 5, 13)
+
+[node name="CorridorSubtract" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/LargeRoom/Wall5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000396729, -0.0302734, -1)
+operation = 2
+size = Vector3(1.31537, 5.41016, 3)
+
+[node name="Wall3" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/LargeRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, 2.7525)
+size = Vector3(31, 5, 0.505005)
+
+[node name="CorridorSubtract" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/LargeRoom/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -0.126221, 0.157974)
+operation = 2
+size = Vector3(3, 5.44873, 1.13138)
+
+[node name="Wall4" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/LargeRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 3, -11)
+size = Vector3(30, 5, 1)
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/LargeRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.80249, 0, -4)
+size = Vector3(30.605, 1, 15)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/LargeRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.76123, 6, -2.27295)
+visible = false
+size = Vector3(18.5225, 1, 11.5459)
+
+[node name="CeilingSubtract" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/LargeRoom/Ceiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.76123, 0.199885, 0)
+operation = 2
+size = Vector3(1, 2.12555, 11.5459)
+
+[node name="LargeRoom2" type="CSGCombiner3D" parent="Room/RoomBlockout2/Middle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, -0.5, 16.5)
+use_collision = true
+
+[node name="Wall2" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/LargeRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 3, 20.5)
+size = Vector3(1, 5, 62)
+
+[node name="Wall5" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/LargeRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 3, 20.5)
+size = Vector3(1, 5, 62)
+
+[node name="CorridorSubtract" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/LargeRoom2/Wall5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.111664, -0.0301208, -22.5)
+operation = 2
+size = Vector3(1.55511, 5.38226, 3)
+
+[node name="Wall4" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/LargeRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 3, -10.8042)
+size = Vector3(40, 5, 0.608398)
+
+[node name="Wall6" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/LargeRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 3, 52)
+size = Vector3(40, 5, 1)
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/LargeRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 20.5)
+size = Vector3(40, 1, 64)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/LargeRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.76123, 6, -2.27295)
+visible = false
+size = Vector3(18.5225, 1, 11.5459)
+
+[node name="CeilingSubtract" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/LargeRoom2/Ceiling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.76123, 0.199885, 0)
+operation = 2
+size = Vector3(1, 2.12555, 11.5459)
+
+[node name="StorageRoom2" type="CSGCombiner3D" parent="Room/RoomBlockout2/Middle"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.5, -0.5, -2.5)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/StorageRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, -1)
+size = Vector3(1, 5, 13)
+
+[node name="Wall2" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/StorageRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.80023, 3, -1)
+size = Vector3(0.600464, 5, 13)
+
+[node name="DoorwaySubtract" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/StorageRoom2/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17801, -0.970947, 3.5)
+operation = 2
+size = Vector3(1.19199, 4.94189, 2)
+
+[node name="Wall3" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/StorageRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 3, 6)
+size = Vector3(5, 5, 1)
+
+[node name="Wall4" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/StorageRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 3, -7.81177)
+size = Vector3(5, 5, 0.623535)
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/StorageRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.79791, 0, -1)
+size = Vector3(4.59583, 1, 15)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/StorageRoom2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.77661, 6, 0.5)
+visible = false
+size = Vector3(4.55322, 1, 12)
+
+[node name="StorageRoom3" type="CSGCombiner3D" parent="Room/RoomBlockout2/Middle"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.5, -0.5, 4.5)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/StorageRoom3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, -4.5)
+size = Vector3(1, 5, 6)
+
+[node name="Wall2" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/StorageRoom3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.80024, 3, -4.5)
+size = Vector3(0.600464, 5, 6)
+
+[node name="Wall3" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/StorageRoom3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 3, -1.2146)
+size = Vector3(5, 5, 0.570801)
+
+[node name="CorridorSubtract" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/StorageRoom3/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.268616, 0.101318)
+operation = 2
+size = Vector3(3, 5.93054, 1.28564)
+
+[node name="Wall4" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/StorageRoom3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 3, -7.81177)
+size = Vector3(5, 5, 0.623535)
+
+[node name="CorridorSubtract" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/StorageRoom3/Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.103882, 0.0176086)
+operation = 2
+size = Vector3(3, 5.39282, 1.09198)
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/StorageRoom3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.79792, 0, -4.45206)
+size = Vector3(4.59583, 1, 7.10358)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room/RoomBlockout2/Middle/StorageRoom3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.77661, 6, 0.5)
+visible = false
+size = Vector3(4.55322, 1, 12)
+
+[node name="Corridor" type="Node3D" parent="Room/RoomBlockout2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71, 0, -24)
+
+[node name="Corridor1" type="CSGCombiner3D" parent="Room/RoomBlockout2/Corridor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -88.5, -0.5, 36.5)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout2/Corridor/Corridor1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 5)
+size = Vector3(3, 1, 3)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room/RoomBlockout2/Corridor/Corridor1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 6, 5)
+size = Vector3(3, 1, 3)
+
+[node name="Wall" type="CSGBox3D" parent="Room/RoomBlockout2/Corridor/Corridor1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 3, 5)
+size = Vector3(3, 5, 3)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Room/RoomBlockout2/Corridor/Corridor1/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.105225, 0.0012207)
+operation = 2
+size = Vector3(2.4, 5.45947, 3.39307)
+
+[node name="Corridor2" type="CSGCombiner3D" parent="Room/RoomBlockout2/Corridor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -80.5, -0.5, 36.5)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Room/RoomBlockout2/Corridor/Corridor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 5)
+size = Vector3(3, 1, 3)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room/RoomBlockout2/Corridor/Corridor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 6, 5)
+size = Vector3(3, 1, 3)
+
+[node name="Wall" type="CSGBox3D" parent="Room/RoomBlockout2/Corridor/Corridor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 3, 5)
+size = Vector3(3, 5, 3)
+
+[node name="WallSubtract" type="CSGBox3D" parent="Room/RoomBlockout2/Corridor/Corridor2/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.105225, 0.0012207)
+operation = 2
+size = Vector3(2.4, 5.45947, 3.39307)

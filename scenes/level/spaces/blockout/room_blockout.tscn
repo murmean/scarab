@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dtgntijntykk8"]
+
+[node name="RoomBlockout" type="Node3D"]
+
+[node name="Room1" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Room1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3, -0.5)
+size = Vector3(1, 5, 16)
+
+[node name="Wall2" type="CSGBox3D" parent="Room1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, -0.5)
+size = Vector3(1, 5, 16)
+
+[node name="Wall3" type="CSGBox3D" parent="Room1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, 7)
+size = Vector3(16, 5, 1)
+
+[node name="Wall4" type="CSGBox3D" parent="Room1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -8)
+size = Vector3(16, 5, 1)
+
+[node name="Floor" type="CSGBox3D" parent="Room1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
+size = Vector3(16, 1, 16)
+
+[node name="Ceiling" type="CSGBox3D" parent="Room1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6, -0.5)
+size = Vector3(16, 1, 16)

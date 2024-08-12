@@ -9,4 +9,4 @@ func state_enter():
 	base_enemy.set_physics_process(true)
 
 func _on_area_3d_body_exited(body):
-	transitioned.emit(self,'idle')
+	transitioned.emit(self,'walk')

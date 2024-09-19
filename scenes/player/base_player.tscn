@@ -111,7 +111,6 @@ spot_range = 6.0
 spot_angle = 70.0
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="Head/Camera3D"]
-visible = false
 light_energy = 1.293
 shadow_enabled = true
 spot_range = 16.559
